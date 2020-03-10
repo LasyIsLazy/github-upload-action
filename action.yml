@@ -1,6 +1,9 @@
 name: 'Upload to GitHub'
 author: 'LasyIsLazy'
 description: 'Upload file to your GitHub repository with Node.js'
+branding:
+  icon: 'upload'
+  color: 'white'
 inputs:
   ACCESS_TOKEN:
     description: 'Token access to repository'
