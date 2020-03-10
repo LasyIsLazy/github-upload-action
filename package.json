@@ -1,0 +1,13 @@
+{
+  "name": "github-upload-action",
+  "version": "v0.0.1-beta.2",
+  "description": "Upload files to GitHub",
+  "main": "index.js",
+  "repository": "git@github.com:LasyIsLazy/github-upload-action.git",
+  "author": "Lasy <1255352506@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "axios": "^0.19.2"
+  }
+}
