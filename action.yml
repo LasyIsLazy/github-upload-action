@@ -1,0 +1,23 @@
+name: 'Upload to GitHub'
+author: 'LasyIsLazy'
+description: 'Upload file to your GitHub repository with Node.js'
+inputs:
+  ACCESS_TOKEN:
+    description: 'Token access to repository'
+    required: true
+  file-path:
+    description: 'Local file path/directory'
+    required: true
+  username:
+    description: 'GitHub username'
+    required: true
+  repo:
+    description: 'Repository name'
+    required: true
+  remote-dir:
+    description: 'Remote repository file path/directory, default: The root of repository'
+    required: false
+    default: ''
+runs:
+  using: 'node12'
+  main: 'index.js'
