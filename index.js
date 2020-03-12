@@ -14,11 +14,10 @@ if (!fs.existsSync(inputPath)) {
   core.setFailed(`filePath doesn't exist: ${inputPath}`)
   return
 }
+const isInputPathDir = fs.lstatSync(inputPath).isDirectory()
+const localDir = isInputPathDir ? inputPath : ''
 
-function getAllFilePaths(curPath) {
-  if (fs.lstatSync(curPath).isFile()) {
-    return [curPath]
-  }
+function getAllFilePaths(curDir) {
   function search(curPath, paths = []) {
     const dir = fs.readdirSync(curPath)
     dir.forEach(item => {
@@ -32,10 +31,11 @@ function getAllFilePaths(curPath) {
     })
     return paths
   }
-  return search(curPath)
+  return search(curDir)
 }
 
-const filePaths = getAllFilePaths(inputPath)
+const filePaths = isInputPathDir ? getAllFilePaths(inputPath) : [inputPath]
+core.debug(`filePaths: ${filePaths}`)
 
 async function uploadAll() {
   for (let index = 0; index < filePaths.length; index++) {
@@ -43,7 +43,7 @@ async function uploadAll() {
     const remotePath = path.join(
       // `remotePath` can not start with `/`
       inputRemoteDir.replace(/^\//, ''),
-      path.relative(inputPath, curPath)
+      path.relative(localDir, curPath)
     )
     console.log(`Upload ${curPath} to ${remotePath}`)
     const base64Cotent = fs.readFileSync(curPath, {
