@@ -5,7 +5,7 @@ branding:
   icon: 'upload'
   color: 'white'
 inputs:
-  ACCESS_TOKEN:
+  access-token:
     description: 'Token access to repository'
     required: true
   file-path:

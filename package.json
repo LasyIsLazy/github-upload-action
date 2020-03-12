@@ -1,6 +1,6 @@
 {
   "name": "github-upload-action",
-  "version": "v0.0.1-beta.4",
+  "version": "v0.0.1",
   "description": "Upload files to GitHub",
   "main": "index.js",
   "repository": "git@github.com:LasyIsLazy/github-upload-action.git",
