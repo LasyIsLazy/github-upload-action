@@ -6,10 +6,12 @@ const inputPath = core.getInput('file-path')
 const inputRemoteDir = core.getInput('remote-dir')
 const inputUsername = core.getInput('username')
 const inputRepo = core.getInput('repo')
-core.debug('inputPath: ' + inputPath)
-core.debug('inputRemoteDir: ' + inputRemoteDir)
-core.debug('inputUsername: ' + inputUsername)
-core.debug('inputRepo: ' + inputRepo)
+const commitMessage = core.getInput('commit-message')
+core.debug('Input path: ' + inputPath)
+core.debug('Input remoteDir: ' + inputRemoteDir)
+core.debug('Input username: ' + inputUsername)
+core.debug('Input repo: ' + inputRepo)
+core.debug('Input commitMessage: ' + commitMessage)
 if (!fs.existsSync(inputPath)) {
   core.setFailed(`filePath doesn't exist: ${inputPath}`)
   return
@@ -54,6 +56,7 @@ async function uploadAll() {
         Authorization: `Bearer ${core.getInput('access-token')}`,
         username: inputUsername,
         repo: inputRepo,
+        commitMessage,
         remotePath
       })
     } catch (error) {

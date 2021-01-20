@@ -8,7 +8,7 @@ const core = require('@actions/core')
 
 async function upload(
   base64Content,
-  { Authorization, remotePath, username, repo }
+  { Authorization, remotePath, username, repo, commitMessage = 'Upload' }
 ) {
   const url =
     BASE_URL +
@@ -46,7 +46,7 @@ async function upload(
       'Content-Type': 'application/json'
     },
     data: {
-      message: 'Auto backup',
+      message: commitMessage,
       sha,
       content: base64Content
     }
