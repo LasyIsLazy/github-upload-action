@@ -11,10 +11,6 @@ async function upload(
   { Authorization, remotePath, username, repo, commitMessage }
 ) {
 
-  if (!commitMessage) {
-    commitMessage  = 'Upload'
-  }
-
   const url =
     BASE_URL +
     path.posix.join(
