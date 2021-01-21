@@ -1,4 +1,5 @@
 # github-upload-action
+
 Upload files to GitHub repository
 
 ## Usage Example
@@ -27,7 +28,6 @@ jobs:
           username: LasyIsLazy
           repo: githubRepo
           remote-dir: remoteDir
- 
 ```
 
 ## requirements
@@ -37,11 +37,11 @@ jobs:
 
 ## options
 
-| key          | required | example                     | description                                                  |
-| ------------ | -------- | --------------------------- | ------------------------------------------------------------ |
-| access-token | ✔        | ${{ secrets.ACCESS_TOKEN }} | Token access to repository.                                  |
-| file-path    | ✔        | localDir/localPath          | Local file path/directory.                                   |
-| username     | ✔        | LasyIsLazy                  | GitHub username.                                             |
-| repo         | ✔        | my-repository               | Repository name.                                             |
-| remote-dir   |          | remoteDir/remotePath        | Remote repository file path/directory(will be created if not exist). Default: The root of the repository. |
-
+| key            | required | example                     | description                                                                                               |
+| -------------- | -------- | --------------------------- | --------------------------------------------------------------------------------------------------------- |
+| access-token   | ✔        | ${{ secrets.ACCESS_TOKEN }} | Token access to repository.                                                                               |
+| file-path      | ✔        | localDir/localPath          | Local file path/directory.                                                                                |
+| username       | ✔        | LasyIsLazy                  | GitHub username.                                                                                          |
+| repo           | ✔        | my-repository               | Repository name.                                                                                          |
+| remote-dir     |          | remoteDir/remotePath        | Remote repository file path/directory(will be created if not exist). Default: The root of the repository. |
+| commit-message |          | Upload files to GitHub      | Git commit message                                                                                        |
