@@ -8,8 +8,13 @@ const core = require('@actions/core')
 
 async function upload(
   base64Content,
-  { Authorization, remotePath, username, repo, commitMessage = 'Upload' }
+  { Authorization, remotePath, username, repo, commitMessage }
 ) {
+
+  if (!commitMessage) {
+    commitMessage  = 'Upload'
+  }
+
   const url =
     BASE_URL +
     path.posix.join(
