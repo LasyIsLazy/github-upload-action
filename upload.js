@@ -17,7 +17,7 @@ async function upload(
   const url =
     BASE_URL +
     path.posix.join(
-      `/repos/${username}/${repo}/contents`,
+      `/repos/${repo}/contents`,
       // GitHub API will decode the remotePath
       encodeURIComponent(remotePath)
     )
