@@ -17,7 +17,7 @@ inputs:
   repo:
     description: 'Repository name'
     required: true    
-  branchName:
+  branch-name:
     description: 'Branch name to upload the file to'
     required: true
   remote-dir:
