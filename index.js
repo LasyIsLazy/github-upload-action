@@ -7,11 +7,13 @@ const inputRemoteDir = core.getInput('remote-dir')
 const inputUsername = core.getInput('username')
 const inputRepo = core.getInput('repo')
 const commitMessage = core.getInput('commit-message')
+const branchName = core.getInput('branchName')
 core.debug('Input path: ' + inputPath)
 core.debug('Input remoteDir: ' + inputRemoteDir)
 core.debug('Input username: ' + inputUsername)
 core.debug('Input repo: ' + inputRepo)
 core.debug('Input commitMessage: ' + commitMessage)
+core.debug('Input branchName: ' + branchName)
 if (!fs.existsSync(inputPath)) {
   core.setFailed(`filePath doesn't exist: ${inputPath}`)
   return
@@ -57,7 +59,8 @@ async function uploadAll() {
         username: inputUsername,
         repo: inputRepo,
         commitMessage,
-        remotePath
+        remotePath,
+        branchName
       })
     } catch (error) {
       core.setFailed(error)

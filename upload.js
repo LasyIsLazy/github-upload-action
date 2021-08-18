@@ -7,7 +7,7 @@ const core = require('@actions/core')
 
 async function upload(
   base64Content,
-  { Authorization, remotePath, username, repo, commitMessage }
+  { Authorization, remotePath, username, repo, commitMessage, branchName }
 ) {
     
   // load api url from context
@@ -52,7 +52,8 @@ async function upload(
     data: {
       message: commitMessage,
       sha,
-      content: base64Content
+      content: base64Content,
+      branch: branchName
     }
   }).then(({ data }) => {
     const { path, sha: currentSha } = data.content
