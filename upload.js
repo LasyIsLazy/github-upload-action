@@ -3,13 +3,16 @@
  */
 const axios = require('axios')
 const path = require('path')
-const BASE_URL = 'https://api.github.com'
 const core = require('@actions/core')
 
 async function upload(
   base64Content,
   { Authorization, remotePath, username, repo, commitMessage }
 ) {
+    
+  // load api url from context
+  let BASE_URL = process.env.GITHUB_API_URL
+  core.debug(`Using API url: ${BASE_URL}`)
 
   const url =
     BASE_URL +
