@@ -49,12 +49,12 @@ async function uploadAll() {
       inputRemoteDir.replace(/^\//, ''),
       path.relative(localDir, curPath)
     )
-    console.log(`Upload ${curPath} to ${remotePath}`)
-    const base64Cotent = fs.readFileSync(curPath, {
+    console.log(`Upload ${curPath} to ${remotePath} on branch ${branchName} for repository ${inputRepo}`)
+    const base64Content = fs.readFileSync(curPath, {
       encoding: 'base64'
     })
     try {
-      await upload(base64Cotent, {
+      let result = await upload(base64Content, {
         Authorization: `Bearer ${core.getInput('access-token')}`,
         username: inputUsername,
         repo: inputRepo,
@@ -62,7 +62,12 @@ async function uploadAll() {
         remotePath,
         branchName
       })
+
+      if (result === null) {
+        core.setFailed('Error uploading the file')  
+      }
     } catch (error) {
+      console.log('Unhandled error uploading the file')
       core.setFailed(error)
     }
   }
