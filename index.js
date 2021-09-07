@@ -50,11 +50,11 @@ async function uploadAll() {
       path.relative(localDir, curPath)
     )
     console.log(`Upload ${curPath} to ${remotePath}`)
-    const base64Cotent = fs.readFileSync(curPath, {
+    const base64Content = fs.readFileSync(curPath, {
       encoding: 'base64'
     })
     try {
-      await upload(base64Cotent, {
+      let result = await upload(base64Content, {
         Authorization: `Bearer ${core.getInput('access-token')}`,
         username: inputUsername,
         repo: inputRepo,
@@ -62,6 +62,11 @@ async function uploadAll() {
         remotePath,
         branchName
       })
+
+      if (result === null) {
+        console.log('Error uploading the file')
+        core.setFailed(error)  
+      }
     } catch (error) {
       console.log('Error uploading the file')
       core.setFailed(error)
