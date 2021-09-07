@@ -45,3 +45,4 @@ jobs:
 | repo           | ✔        | my-repository               | Repository name.                                                                                          |
 | remote-dir     |          | remoteDir/remotePath        | Remote repository file path/directory(will be created if not exist). Default: The root of the repository. |
 | commit-message |          | Upload files to GitHub      | Git commit message                                                                                        |
+| branch-name    |          | my-branch-name              | Branch name to upload the file(s) to. Branch must exists                                                  |
