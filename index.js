@@ -65,10 +65,10 @@ async function uploadAll() {
 
       if (result === null) {
         console.log('Error uploading the file')
-        core.setFailed(error)  
+        core.setFailed('Error uploading the file')  
       }
     } catch (error) {
-      console.log('Error uploading the file')
+      console.log('Unhandled error uploading the file')
       core.setFailed(error)
     }
   }
