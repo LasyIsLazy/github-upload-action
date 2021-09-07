@@ -63,6 +63,7 @@ async function uploadAll() {
         branchName
       })
     } catch (error) {
+      console.log('Error uploading the file')
       core.setFailed(error)
     }
   }
