@@ -7,7 +7,7 @@ const core = require('@actions/core')
 
 async function upload(
   base64Content,
-  { Authorization, remotePath, username, repo, commitMessage, branchName }
+  { Authorization, remotePath, owner, repo, commitMessage, branchName }
 ) {
     
   // load api url from context
@@ -17,7 +17,7 @@ async function upload(
   const url =
     BASE_URL +
     path.posix.join(
-      `/repos/${repo}/contents`,
+      `/repos/${owner}/${repo}/contents`,
       // GitHub API will decode the remotePath
       encodeURIComponent(remotePath)
     )

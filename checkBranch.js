@@ -4,9 +4,10 @@
  const axios = require('axios')
  const path = require('path')
  const core = require('@actions/core')
+const { connected } = require('process')
  
  async function checkBranch(
-   { Authorization, username, repo, branchName }
+   { Authorization, owner, repo, branchName }
  ) {
      
    // load api url from context
@@ -17,7 +18,7 @@
    const url =
      BASE_URL +
      path.posix.join(
-       `/repos/${repo}/branches`
+       `/repos/${owner}/${repo}/branches`
      )
    core.debug(`Request URL: ${url}`)
    // load all branches, since we need the info about the default branch as well
@@ -54,19 +55,20 @@
    }
 
    // check if the branch name already exists
-   let branch = branches.find(branch => { branch.name === branchName })
+   let branch = branches.find(function(branch) { return branch.name === branchName })
 
    if (branch) {
     core.debug(`Branch with name ${branchName} already exists, continuing as normal`)
+    return { }
    }
    else {
-    core.debug(`Need to create a new branch first with name ${branchName}`)
+    console.log(`Need to create a new branch first with name ${branchName}`)
     let defaultBranch = branches[0]
     console.log(`Found default branch to branch of: ${defaultBranch.name} with sha: ${defaultBranch.commit.sha}`)
 
     let branchCreateUrl = BASE_URL +
       path.posix.join(
-        `/repos/${repo}/git/refs`
+        `/repos/${owner}/${repo}/git/refs`
       )
     core.debug(`Request URL to create new branch: ${branchCreateUrl}`)
 
@@ -83,10 +85,12 @@
             sha: defaultBranch.commit.sha
         }
     }).then(({ data }) => {
+        core.debug(`Branch with name ${defaultBranch.name} created`)
         // return non empty object to check on
-        console.log(`created new branch with ref: ${data.ref} based on ${defaultBranch.name}`)
+        console.log(`Created new branch with ref: ${data.ref} based on ${defaultBranch.name}`)        
         return { }
     }).catch(err => {
+        core.debug(`Error creatng new branch: ${err}`)
         console.log(`Error creating the branch with name ${branchName} and sha ${defaultBranch.commit.sha}: ${error}`)
         return null
     })
