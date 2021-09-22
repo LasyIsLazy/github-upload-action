@@ -11,11 +11,14 @@ inputs:
   file-path:
     description: 'Local file path/directory'
     required: true
-  username:
-    description: 'GitHub username'
+  owner:
+    description: 'Repository owner'
     required: true
   repo:
     description: 'Repository name'
+    required: true    
+  branch-name:
+    description: 'Branch name to upload the file to'
     required: true
   remote-dir:
     description: 'Remote repository file path/directory, default: The root of repository'

@@ -7,7 +7,7 @@ const core = require('@actions/core')
 
 async function upload(
   base64Content,
-  { Authorization, remotePath, username, repo, commitMessage }
+  { Authorization, remotePath, owner, repo, commitMessage, branchName }
 ) {
     
   // load api url from context
@@ -17,7 +17,7 @@ async function upload(
   const url =
     BASE_URL +
     path.posix.join(
-      `/repos/${username}/${repo}/contents`,
+      `/repos/${owner}/${repo}/contents`,
       // GitHub API will decode the remotePath
       encodeURIComponent(remotePath)
     )
@@ -52,7 +52,8 @@ async function upload(
     data: {
       message: commitMessage,
       sha,
-      content: base64Content
+      content: base64Content,
+      branch: branchName
     }
   }).then(({ data }) => {
     const { path, sha: currentSha } = data.content
@@ -66,6 +67,9 @@ async function upload(
       sha,
       currentSha
     }
+  }).catch(err => {
+    console.log(`Error uploading the file. Check if the branch [${branchName}] exists and if the access-token has write rights.`)
+    return null
   })
 }
 module.exports = upload
