@@ -14,13 +14,17 @@ async function upload(
   let BASE_URL = process.env.GITHUB_API_URL
   core.debug(`Using API url: ${BASE_URL}`)
 
-  const url =
+  let url =
     BASE_URL +
     path.posix.join(
       `/repos/${owner}/${repo}/contents`,
       // GitHub API will decode the remotePath
       encodeURIComponent(remotePath)
     )
+  // if the file should be placed in a branch, we need to add a query param
+  if (branchName) {
+    url += `?ref=${branchName}`
+  }
   core.debug(`Request URL: ${url}`)
   // if content exists
   const res = await axios({
