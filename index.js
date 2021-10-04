@@ -21,6 +21,11 @@ if (!fs.existsSync(inputPath)) {
   return
 }
 
+if (inputRepo.indexOf('/') !== -1) {
+  core.setFailed(`inputRepo cannot contain any slashes use the owner parameter to indicate the owner`)
+  return
+}
+
 async function createBranchIfNotExists() {
   let branchResult = await checkBranch({
     Authorization: `Bearer ${core.getInput('access-token')}`,
