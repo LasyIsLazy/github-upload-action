@@ -21,7 +21,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
       - name: Upload to GitHub
-        uses: LasyIsLazy/github-upload-action@v0.0.1
+        uses: LasyIsLazy/github-upload-action@v0.1.0
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           file-path: localPath
