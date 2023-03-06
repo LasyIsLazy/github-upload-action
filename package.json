@@ -7,7 +7,7 @@
   "author": "Lasy <1255352506@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.5.0",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.0"
   }
 }
